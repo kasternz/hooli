@@ -1,0 +1,91 @@
+@import "tailwindcss";
+
+@theme {
+  --color-navy: #070224;
+  --color-navy-mid: #110a3a;
+  --color-navy-soft: #1c1450;
+  --color-paper: #f6f3ec;
+  --color-paper-deep: #ebe6d9;
+  --color-ink: #070224;
+  --color-muted: #6a6780;
+  --color-cream: #f6f3ec;
+  --color-line: #ddd6c6;
+  --color-whatsapp: #128c4b;
+  --color-whatsapp-fg: #f6f3ec;
+  --color-danger: #8f2d2d;
+
+  --font-display: "Barlow Condensed", "Arial Narrow", sans-serif;
+  --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
+
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --radius-xl: 28px;
+
+  --shadow-border: 0 0 0 1px rgb(7 2 36 / 0.08), 0 1px 2px -1px rgb(7 2 36 / 0.06),
+    0 8px 24px -12px rgb(7 2 36 / 0.12);
+  --shadow-border-hover: 0 0 0 1px rgb(7 2 36 / 0.12), 0 10px 28px -12px rgb(7 2 36 / 0.18);
+
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  html,
+  body,
+  #root {
+    min-height: 100%;
+  }
+
+  body {
+    margin: 0;
+    background: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    line-height: 1.5;
+  }
+
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    text-wrap: balance;
+    font-family: var(--font-display);
+    letter-spacing: 0.02em;
+    line-height: 1.1;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  img {
+    outline: 1px solid rgb(7 2 36 / 0.08);
+    outline-offset: -1px;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-navy);
+    outline-offset: 3px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

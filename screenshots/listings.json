@@ -1,0 +1,36 @@
+{
+  "url": "http://127.0.0.1:8080/listings",
+  "viewports": {
+    "desktop": {
+      "width": 1280,
+      "height": 800,
+      "status": 200,
+      "title": "Hooli Real Estate",
+      "hasCanvas": false,
+      "bodyTextLen": 3402,
+      "bodyTextHash": "501ddf6c115bf8ad252d03d0bda4e995c2bc2ce834cbe6976fb2adb7d0e1ed92",
+      "bodyTextPrefix": "HOOLI REAL ESTATE Propiedades Desarrollos Contacto ES EN HOOLI R",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/listings.png"
+    },
+    "mobile": {
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "title": "Hooli Real Estate",
+      "hasCanvas": false,
+      "bodyTextLen": 3363,
+      "bodyTextHash": "cccf4dc9a406ada8a6d53d02551e7048c67a2fbee7e7d6b58f796ff7b9c7921e",
+      "bodyTextPrefix": "HOOLI REAL ESTATE HOOLI REAL ESTATE Todas las propiedades Selecc",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/listings-mobile.png"
+    }
+  },
+  "brandWarnings": [],
+  "authWarnings": [],
+  "verdictFile": "/workspace/screenshots/listings.json"
+}

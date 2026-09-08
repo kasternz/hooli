@@ -1,0 +1,36 @@
+{
+  "url": "http://127.0.0.1:8080/",
+  "viewports": {
+    "desktop": {
+      "width": 1280,
+      "height": 800,
+      "status": 200,
+      "title": "Hooli Real Estate",
+      "hasCanvas": false,
+      "bodyTextLen": 3013,
+      "bodyTextHash": "c4d40cb36a479745ae3236f94489b0e13b34d62bfbbdbe72fbcef3cfe6f4ef6b",
+      "bodyTextPrefix": "HOOLI REAL ESTATE Hooli Real Estate Propiedades Desarrollos Cont",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/app-builder-preview.png"
+    },
+    "mobile": {
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "title": "Hooli Real Estate",
+      "hasCanvas": false,
+      "bodyTextLen": 2952,
+      "bodyTextHash": "8dd94d8a8678f8f6b7a43eea788220a5ff6acc924756e9d45807e8f5691b2111",
+      "bodyTextPrefix": "HOOLI REAL ESTATE Hooli Real Estate RIVIERA MAYA · QUINTANA ROO ",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/app-builder-preview-mobile.png"
+    }
+  },
+  "brandWarnings": [],
+  "authWarnings": [],
+  "verdictFile": "/workspace/screenshots/app-builder-preview.json"
+}

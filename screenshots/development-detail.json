@@ -1,0 +1,38 @@
+{
+  "url": "http://127.0.0.1:8080/listings/selva-maya-residences",
+  "viewports": {
+    "desktop": {
+      "width": 1280,
+      "height": 800,
+      "status": 200,
+      "title": "Hooli Real Estate",
+      "hasCanvas": false,
+      "bodyTextLen": 1905,
+      "bodyTextHash": "41f28be272a616e09d8f75d18401a0bb3e3b2631a2080995334138968bd4ea04",
+      "bodyTextPrefix": "HOOLI REAL ESTATE Propiedades Desarrollos Contacto ES EN Volver ",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/development-detail.png"
+    },
+    "mobile": {
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "title": "Hooli Real Estate",
+      "hasCanvas": false,
+      "bodyTextLen": 1866,
+      "bodyTextHash": "59f57786cd71ed764424dbd5a5ab40761de4f506991567207729b4fbb7d45927",
+      "bodyTextPrefix": "HOOLI REAL ESTATE Volver PREVENTA DESARROLLO Región Tulum / selv",
+      "horizontalOverflow": false,
+      "consoleErrors": [
+        "A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:\n\n- A server/client branch `if (typeof window !== 'undefined')`.\n- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.\n- Date formatting in a user's locale which doesn't match the server.\n- External changing data without sending a snapshot of it along with the HTML.\n- Invalid HTML tag nesting.\n\nIt can also happen if the client has a browser extension installed which messes with the HTML before React loaded.\n\n%s%s https://react.dev/link/hydration-mismatch \n\n  ...\n    <CatchBoundary getResetKey={function getResetKey} errorComponent={function AppErrorComponent} ...>\n      <SafeFragment fallback={function fallback}>\n        <MatchInnerImpl match={{id:\"/listi...\", ...}}>\n          <Lazy>\n            <ListingDetail>\n              <div className=\"mx-auto ma...\">\n                <a>\n                <div>\n                <div>\n                <dl>\n                <div>\n                <div className=\"mt-10 grid...\">\n                  <div>\n                  <aside className=\"lg:sticky ...\">\n                    <div className=\"rounded-lg...\">\n                      <p>\n                      <p>\n                      <p>\n                      <p>\n                      <div>\n                      <div className=\"mt-6 borde...\">\n                        <ContactForm listing={{id:\"selva-...\", ...}}>\n                          <form onSubmit={function onEmail} className=\"space-y-4\">\n                            <Field id=\"name\" label=\"Nombre\">\n                              <div>\n                                <Label>\n                                <Input id=\"name\" required={true} autoComplete=\"name\" value=\"\" ...>\n                                  <input\n                                    className=\"w-full rounded-md bg-paper px-3.5 text-ink ring-1 ring-navy/15 placehol...\"\n                                    id=\"name\"\n                                    required={true}\n                                    autoComplete=\"name\"\n                                    value=\"\"\n                                    onChange={function onChange}\n-                                   style={{caret-color:\"transparent\"}}\n                                  >\n                            <div className=\"grid gap-4...\">\n                              <Field id=\"email\" label=\"Correo\">\n                                <div>\n                                  <Label>\n                                  <Input id=\"email\" type=\"email\" required={true} autoComplete=\"email\" value=\"\" ...>\n                                    <input\n                                      className=\"w-full rounded-md bg-paper px-3.5 text-ink ring-1 ring-navy/15 placeh...\"\n                                      id=\"email\"\n                                      type=\"email\"\n                                      required={true}\n                                      autoComplete=\"email\"\n                                      value=\"\"\n                                      onChange={function onChange}\n-                                     style={{caret-color:\"transparent\"}}\n                                    >\n                              <Field id=\"phone\" label=\"Teléfono\">\n                                <div>\n                                  <Label>\n                                  <Input id=\"phone\" type=\"tel\" autoComplete=\"tel\" value=\"\" onChange={function onChange}>\n                                    <input\n                                      className=\"w-full rounded-md bg-paper px-3.5 text-ink ring-1 ring-navy/15 placeh...\"\n                                      id=\"phone\"\n                                      type=\"tel\"\n                                      autoComplete=\"tel\"\n                                      value=\"\"\n                                      onChange={function onChange}\n-                                     style={{caret-color:\"transparent\"}}\n                                    >\n                            <Field>\n                            <Field id=\"message\" label=\"Mensaje\">\n                              <div>\n                                <Label>\n                                <Textarea id=\"message\" required={true} value=\"\" onChange={function onChange}>\n                                  <textarea\n                                    className=\"w-full rounded-md bg-paper px-3.5 text-ink ring-1 ring-navy/15 placehol...\"\n                                    id=\"message\"\n                                    required={true}\n                                    value=\"\"\n                                    onChange={function onChange}\n-                                   style={{caret-color:\"transparent\"}}\n                                  >\n                            ...\n"
+      ],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/development-detail-mobile.png"
+    }
+  },
+  "brandWarnings": [],
+  "authWarnings": [],
+  "verdictFile": "/workspace/screenshots/development-detail.json"
+}

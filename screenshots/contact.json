@@ -1,0 +1,36 @@
+{
+  "url": "http://127.0.0.1:8080/contact",
+  "viewports": {
+    "desktop": {
+      "width": 1280,
+      "height": 800,
+      "status": 200,
+      "title": "Hooli Real Estate",
+      "hasCanvas": false,
+      "bodyTextLen": 1424,
+      "bodyTextHash": "cf713cb9c1db694e4fa5fa64557944aaf3254a7a85d7629d61e74ff363a0e6a1",
+      "bodyTextPrefix": "HOOLI REAL ESTATE Propiedades Desarrollos Contacto ES EN HOOLI R",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/contact.png"
+    },
+    "mobile": {
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "title": "Hooli Real Estate",
+      "hasCanvas": false,
+      "bodyTextLen": 1385,
+      "bodyTextHash": "b785133e8598862fc2c06573c77c3dbae2297feb0373cf2c2f95877fa699a903",
+      "bodyTextPrefix": "HOOLI REAL ESTATE HOOLI REAL ESTATE Contacto Escríbele a Nicolas",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/contact-mobile.png"
+    }
+  },
+  "brandWarnings": [],
+  "authWarnings": [],
+  "verdictFile": "/workspace/screenshots/contact.json"
+}
