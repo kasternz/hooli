@@ -284,6 +284,18 @@
 
   /* CALCULATOR */
   .calculator{background:var(--sand);}
+  .trust-chips{margin-top:24px; display:flex; gap:10px; flex-wrap:wrap;}
+  .trust-chips span{
+    border:1px solid var(--lagoon); color:var(--lagoon); background:rgba(27,138,128,0.08);
+    padding:8px 16px; font-size:13px; font-weight:600;
+  }
+  /* Sobre fondo oscuro (deep-sea) el lagoon pierde contraste — se usa sun,
+     igual que el resto de los acentos en secciones oscuras del sitio. */
+  .quote .trust-chips span{
+    border-color:var(--sun); color:var(--sun); background:rgba(242,169,59,0.08);
+  }
+  .calc-note.calc-warn{color:var(--sun); font-weight:600;}
+  .calc-note a{color:var(--sun); text-decoration:underline;}
   .calc-grid{margin-top:48px; display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:start;}
   .calc-inputs{display:flex; flex-direction:column; gap:16px;}
   .calc-inputs label{font-size:12.5px; color:var(--ink-soft); font-weight:600;}
@@ -751,6 +763,11 @@
     <h2 class="section-title">Calcula tu sistema en 10 segundos.</h2>
     <p class="section-lede">Usa el consumo bimestral de tu recibo CFE (casilla "Energía (kWh)" o "Consumo total") para ver un estimado al instante. Es un cálculo preliminar — tu cotización formal la confirma nuestro equipo.</p>
 
+    <div class="trust-chips">
+      <span>Cotización sin costo</span>
+      <span>Meses sin intereses con banco afiliado</span>
+    </div>
+
     <div class="calc-grid">
       <div class="calc-inputs">
         <div>
@@ -776,6 +793,10 @@
             <option value="hotelero">Hotelero / obra completa</option>
           </select>
         </div>
+        <div>
+          <label for="calcArea">Área libre en techo o terreno (m²) — opcional</label>
+          <input id="calcArea" type="number" min="0" step="0.5" placeholder="Ej. 25" inputmode="decimal" oninput="calcularSistema()">
+        </div>
       </div>
 
       <div class="calc-result" id="calcResult">
@@ -784,7 +805,8 @@
     </div>
 
     <div class="hero-ctas" style="margin-top:32px;">
-      <a href="#cotiza" class="btn btn-primary">Convertir en cotización formal</a>
+      <a href="#cotiza" class="btn btn-primary">Solicitar cotización sin costo</a>
+      <a href="#cotiza" class="btn btn-outline">Pedir visita presencial o remota</a>
     </div>
   </div>
 </section>
@@ -795,6 +817,10 @@
       <div class="eyebrow-line"><div class="dash"></div><span>Cotiza en línea</span></div>
       <h2 class="section-title">Recibe tu propuesta en 24–48 horas.</h2>
       <p>Cuéntanos tu consumo o dirección y te contactamos con un rango de precio, tamaño de sistema y tipo de financiamiento disponible.</p>
+      <div class="trust-chips">
+        <span>Cotización 100% sin costo</span>
+        <span>Meses sin intereses con banco afiliado</span>
+      </div>
     </div>
     <form class="qform" onsubmit="handleQuote(event)">
       <div>
@@ -870,11 +896,17 @@
   const HORAS_SOL_PICO_PLAYA_DEL_CARMEN = 5.5;
   const FACTOR_PERDIDAS_SISTEMA = 0.80;
   const DIAS_POR_PERIODO_BIMESTRAL = 60;
+  // Panel de referencia (JA Solar JAM66D46 LB 720W): 2384 x 1303 mm ≈ 3.1 m².
+  // Se suma ~20% de espacio para tornillería, pasillo de mantenimiento e
+  // inclinación. Es la misma cifra aproximada para cualquier potencia de
+  // panel — solo sirve para saber si el área alcanza, no es una medición.
+  const AREA_APROX_POR_PANEL_M2 = 3.7;
 
   function calcularSistema(){
     const kwh = parseFloat(document.getElementById('calcKwh').value);
     const panelW = parseFloat(document.getElementById('calcPanel').value);
     const tipo = document.getElementById('calcTipo').value;
+    const areaDisponible = parseFloat(document.getElementById('calcArea').value);
     const result = document.getElementById('calcResult');
 
     if(!kwh || kwh <= 0){
@@ -886,17 +918,31 @@
     const kwSistema = kwhDiario / (HORAS_SOL_PICO_PLAYA_DEL_CARMEN * FACTOR_PERDIDAS_SISTEMA);
     const numPaneles = Math.max(1, Math.round((kwSistema * 1000) / panelW));
     const potenciaInstaladaKw = (numPaneles * panelW) / 1000;
+    const areaRequeridaM2 = numPaneles * AREA_APROX_POR_PANEL_M2;
 
     const notaTipo = tipo === 'residencial' ? '' :
       '<div class="calc-note">Los proyectos comerciales/hoteleros suelen operar en media tensión — el tamaño final se confirma con un estudio de demanda de carga.</div>';
+
+    let notaArea;
+    if(!isNaN(areaDisponible) && areaDisponible > 0){
+      if(areaDisponible < areaRequeridaM2){
+        notaArea = `<div class="calc-note calc-warn">Con ${areaDisponible} m² disponibles, tu espacio podría no alcanzar para el sistema completo (se necesitan ~${areaRequeridaM2.toFixed(0)} m²). No pasa nada: pide una <a href="#cotiza">visita presencial o remota, sin costo</a>, y te proponemos alternativas.</div>`;
+      } else {
+        notaArea = `<div class="calc-note">Tu área disponible (${areaDisponible} m²) alcanza para el sistema estimado.</div>`;
+      }
+    } else {
+      notaArea = `<div class="calc-note">¿No sabes cuánta área libre tienes? Pide una <a href="#cotiza">visita presencial o remota, sin costo</a>, y la medimos por ti.</div>`;
+    }
 
     result.innerHTML = `
       <div class="calc-stat"><span>Consumo diario promedio</span><b>${kwhDiario.toFixed(1)} kWh/día</b></div>
       <div class="calc-stat"><span>Tamaño de sistema recomendado</span><b>${kwSistema.toFixed(2)} kW</b></div>
       <div class="calc-stat"><span>Paneles sugeridos</span><b>${numPaneles} × ${panelW} W</b></div>
       <div class="calc-stat"><span>Potencia instalada total</span><b>${potenciaInstaladaKw.toFixed(2)} kW</b></div>
+      <div class="calc-stat"><span>Área aproximada necesaria</span><b>~${areaRequeridaM2.toFixed(0)} m²</b></div>
+      ${notaArea}
       ${notaTipo}
-      <div class="calc-note">Estimado preliminar, no incluye precio. Súbelo a la cotización formal para confirmarlo con tu recibo o una visita técnica.</div>
+      <div class="calc-note">Estimado preliminar, sin costo y sin compromiso — no incluye precio. Al confirmar tu cotización formal, ve las opciones de meses sin intereses con nuestro banco afiliado.</div>
     `;
   }
 
