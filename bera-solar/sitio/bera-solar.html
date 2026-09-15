@@ -105,6 +105,10 @@
 
   .horizon-graphic{position:relative; height:340px;}
   .panel-svg{width:100%; height:100%;}
+  .hero-photo{
+    width:100%; height:100%; object-fit:cover;
+    box-shadow:0 24px 60px rgba(0,0,0,0.35); border:1px solid rgba(245,240,230,0.15);
+  }
 
   .hero-stats{
     margin-top:80px; padding-top:32px; border-top:1px solid rgba(245,240,230,0.18);
@@ -131,6 +135,7 @@
   .installer-card{
     border-top:1px solid var(--sand-line); padding-top:24px; margin-top:24px;
   }
+  .installer-photo{width:100%; height:200px; object-fit:cover; margin-bottom:20px;}
   .installer-card .name{font-family:'Big Shoulders Display',sans-serif; font-weight:700; font-size:22px;}
   .installer-card .role{color:var(--lagoon); font-size:13.5px; font-weight:600; margin-top:2px;}
   .divisions{display:flex; flex-direction:column; gap:0;}
@@ -160,6 +165,8 @@
   .why-cell h3{font-size:21px; margin-top:14px; color:var(--sand); font-weight:700;}
   .why-cell p{color:#AFC3BF; font-size:14.5px; margin-top:10px;}
 
+  .divider-photo{width:100%; height:380px; object-fit:cover; display:block;}
+
   /* SERVICES */
   .services-grid{
     margin-top:56px; display:grid; grid-template-columns:repeat(3,1fr); gap:0;
@@ -177,8 +184,9 @@
   }
 
   /* TECHNOLOGY */
+  .tech-photo{width:100%; height:320px; object-fit:cover; margin-top:40px;}
   .tech-sub{font-size:24px; margin-top:64px;}
-  .tech-sub:first-of-type{margin-top:56px;}
+  .tech-sub:first-of-type{margin-top:40px;}
   .tech-note{color:var(--ink-soft); font-size:14.5px; margin-top:8px; max-width:560px;}
 
   .tech-compare{
@@ -262,6 +270,7 @@
 
   /* HOTELS / REGULARIZATION */
   .hotels{padding:100px 0;}
+  .hotels-photo{width:100%; height:360px; object-fit:cover; margin-bottom:56px;}
   .hotels-inner{
     display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:center;
   }
@@ -272,6 +281,23 @@
   }
   .checklist li:last-child{border-bottom:1px solid var(--sand-line);}
   .checklist .mark{color:var(--lagoon); font-weight:700;}
+
+  /* CALCULATOR */
+  .calculator{background:var(--sand);}
+  .calc-grid{margin-top:48px; display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:start;}
+  .calc-inputs{display:flex; flex-direction:column; gap:16px;}
+  .calc-inputs label{font-size:12.5px; color:var(--ink-soft); font-weight:600;}
+  .calc-inputs input, .calc-inputs select{
+    width:100%; border:1px solid var(--sand-line); background:#fff;
+    font-family:'Work Sans',sans-serif; font-size:15px; color:var(--ink); padding:12px 14px;
+  }
+  .calc-inputs input:focus, .calc-inputs select:focus{outline:none; border-color:var(--lagoon);}
+  .calc-result{background:var(--deep-sea); color:var(--sand); padding:32px; min-height:220px;}
+  .calc-empty{color:#B9CBC7; font-size:14px;}
+  .calc-stat{display:flex; justify-content:space-between; align-items:baseline; gap:12px; padding:14px 0; border-top:1px solid rgba(245,240,230,0.18); font-size:14.5px;}
+  .calc-stat:first-child{border-top:none;}
+  .calc-stat b{font-family:'Big Shoulders Display',sans-serif; font-size:21px; color:var(--sun); font-weight:700; white-space:nowrap;}
+  .calc-note{margin-top:16px; font-size:12.5px; color:#B9CBC7;}
 
   /* QUOTE FORM */
   .quote{background:var(--deep-sea); color:var(--sand);}
@@ -317,7 +343,7 @@
     .service{border-right:none; border-bottom:1px solid var(--sand-line); padding:28px 0;}
     .process-item{grid-template-columns:50px 1fr; grid-template-areas:"num title" "num time";}
     .process-item .ptime{text-align:left;}
-    .fin-grid, .hotels-inner, .quote-grid{grid-template-columns:1fr;}
+    .fin-grid, .hotels-inner, .quote-grid, .calc-grid{grid-template-columns:1fr;}
     .nav-links{display:none;}
     .menu-toggle{display:block;}
   }
@@ -333,6 +359,7 @@
       <a href="#servicios">Servicios</a>
       <a href="#tecnologia">Tecnología</a>
       <a href="#proceso">Proceso</a>
+      <a href="#calculadora">Calculadora</a>
       <a href="#financiamiento">Financiamiento</a>
       <a href="#hoteles">Negocios y hoteles</a>
     </div>
@@ -351,7 +378,15 @@
       </div>
     </div>
     <div class="horizon-graphic">
-      <svg class="panel-svg" viewBox="0 0 420 340" xmlns="http://www.w3.org/2000/svg">
+      <!-- Foto de stock (Pexels, licencia libre de uso comercial) — reemplazar
+           por una foto real de una instalación de Bera Solar en cuanto se
+           tenga (ver tarea pendiente "imágenes reales de proyectos"). Si el
+           link se cae, cae de vuelta al gráfico SVG de abajo. -->
+      <img class="hero-photo" loading="eager"
+           src="https://images.pexels.com/photos/9875442/pexels-photo-9875442.jpeg?auto=compress&cs=tinysrgb&w=1600"
+           alt="Panel solar instalado en un techo residencial con palmeras alrededor"
+           onerror="this.style.display='none'; document.getElementById('heroSvgFallback').style.display='block';">
+      <svg id="heroSvgFallback" class="panel-svg" style="display:none;" viewBox="0 0 420 340" xmlns="http://www.w3.org/2000/svg">
         <circle cx="330" cy="70" r="46" fill="#F2A93B" opacity="0.9"/>
         <line x1="150" y1="220" x2="410" y2="220" stroke="#38B3A6" stroke-width="1"/>
         <g stroke="#F5F0E6" stroke-width="1" opacity="0.85">
@@ -395,6 +430,12 @@
         <p>Nuestro equipo de instalación trabaja directo con el cliente de principio a fin — desde la cotización hasta la puesta en marcha ante CFE — usando panel bifacial, que genera más energía por metro cuadrado que un panel convencional.</p>
 
         <div class="installer-card">
+          <!-- Foto de stock (Pexels, licencia libre) — cambiar por una foto
+               real del equipo de Alberto en obra cuando esté disponible. -->
+          <img class="installer-photo" loading="lazy"
+               src="https://images.pexels.com/photos/35237908/pexels-photo-35237908.jpeg?auto=compress&cs=tinysrgb&w=1200"
+               alt="Instalador colocando paneles solares en un techo residencial"
+               onerror="this.remove()">
           <div class="name">Alberto y su equipo</div>
           <div class="role">Instalación en sitio</div>
           <p style="margin-top:10px;">Alberto lidera al equipo que ejecuta cada instalación directamente en obra — residencial, comercial y hotelera — sin intermediarios entre la cotización y el trabajo terminado.</p>
@@ -449,6 +490,13 @@
   </div>
 </section>
 
+<!-- Foto de stock (Pexels, licencia libre) — cambiar por una foto real de
+     una instalación de Bera Solar cuando esté disponible. -->
+<img class="divider-photo" loading="lazy"
+     src="https://images.pexels.com/photos/12243093/pexels-photo-12243093.jpeg?auto=compress&cs=tinysrgb&w=1600"
+     alt="Casa residencial con paneles solares en el techo bajo cielo despejado"
+     onerror="this.remove()">
+
 <section id="servicios">
   <div class="wrap">
     <div class="eyebrow-line"><div class="dash"></div><span>Servicios</span></div>
@@ -479,6 +527,13 @@
     <div class="eyebrow-line"><div class="dash"></div><span>Tecnología y equipo</span></div>
     <h2 class="section-title">No todos los sistemas solares son iguales.</h2>
     <p class="section-lede">Estas son las tecnologías y materiales con los que trabajamos, y por qué elegimos cada una según el proyecto.</p>
+
+    <!-- Foto de stock (Pexels, licencia libre) — cambiar por una foto real
+         de nuestros paneles instalados cuando esté disponible. -->
+    <img class="tech-photo" loading="lazy"
+         src="https://images.pexels.com/photos/9799702/pexels-photo-9799702.jpeg?auto=compress&cs=tinysrgb&w=1600"
+         alt="Vista de cerca de las celdas de un panel solar"
+         onerror="this.remove()">
 
     <h3 class="tech-sub">Paneles: convencional vs. bifacial</h3>
     <div class="tech-compare">
@@ -668,6 +723,12 @@
 </section>
 
 <section id="hoteles" class="hotels">
+  <!-- Foto de stock (Pexels, licencia libre) — cambiar por una foto real de
+       un proyecto hotelero/comercial de Bera Solar cuando esté disponible. -->
+  <img class="hotels-photo" loading="lazy"
+       src="https://images.pexels.com/photos/8783541/pexels-photo-8783541.jpeg?auto=compress&cs=tinysrgb&w=1600"
+       alt="Vista aérea de un arreglo grande de paneles solares en un techo comercial"
+       onerror="this.remove()">
   <div class="wrap hotels-inner">
     <div class="hotels-copy">
       <div class="eyebrow-line"><div class="dash"></div><span>Negocios y hoteles</span></div>
@@ -681,6 +742,50 @@
       <li><span class="mark">—</span> Medidor bidireccional listo para operar</li>
       <li><span class="mark">—</span> Acompañamiento durante todo el trámite, sin que el cliente lo gestione solo</li>
     </ul>
+  </div>
+</section>
+
+<section id="calculadora" class="calculator">
+  <div class="wrap">
+    <div class="eyebrow-line"><div class="dash"></div><span>Cotizador personalizado</span></div>
+    <h2 class="section-title">Calcula tu sistema en 10 segundos.</h2>
+    <p class="section-lede">Usa el consumo bimestral de tu recibo CFE (casilla "Energía (kWh)" o "Consumo total") para ver un estimado al instante. Es un cálculo preliminar — tu cotización formal la confirma nuestro equipo.</p>
+
+    <div class="calc-grid">
+      <div class="calc-inputs">
+        <div>
+          <label for="calcKwh">Consumo bimestral (kWh)</label>
+          <input id="calcKwh" type="number" min="0" step="1" placeholder="Ej. 850" inputmode="numeric" oninput="calcularSistema()">
+        </div>
+        <div>
+          <label for="calcPanel">Potencia de panel</label>
+          <select id="calcPanel" onchange="calcularSistema()">
+            <option value="605">605 W</option>
+            <option value="630">630 W</option>
+            <option value="645">645 W</option>
+            <option value="715">715 W</option>
+            <option value="720" selected>720 W — JA Solar bifacial (referencia)</option>
+            <option value="730">730 W</option>
+          </select>
+        </div>
+        <div>
+          <label for="calcTipo">Tipo de proyecto</label>
+          <select id="calcTipo" onchange="calcularSistema()">
+            <option value="residencial">Residencial</option>
+            <option value="comercial">Comercial</option>
+            <option value="hotelero">Hotelero / obra completa</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="calc-result" id="calcResult">
+        <div class="calc-empty">Ingresa tu consumo bimestral para ver el estimado.</div>
+      </div>
+    </div>
+
+    <div class="hero-ctas" style="margin-top:32px;">
+      <a href="#cotiza" class="btn btn-primary">Convertir en cotización formal</a>
+    </div>
   </div>
 </section>
 
@@ -759,6 +864,41 @@
     if (window.scrollY > 40) nav.classList.add('solid');
     else nav.classList.remove('solid');
   });
+
+  // Mismos parámetros y fórmula que cotizador/cotizador_cfe.py — si se
+  // ajustan allá (horas sol pico, factor de pérdidas), ajustar aquí también.
+  const HORAS_SOL_PICO_PLAYA_DEL_CARMEN = 5.5;
+  const FACTOR_PERDIDAS_SISTEMA = 0.80;
+  const DIAS_POR_PERIODO_BIMESTRAL = 60;
+
+  function calcularSistema(){
+    const kwh = parseFloat(document.getElementById('calcKwh').value);
+    const panelW = parseFloat(document.getElementById('calcPanel').value);
+    const tipo = document.getElementById('calcTipo').value;
+    const result = document.getElementById('calcResult');
+
+    if(!kwh || kwh <= 0){
+      result.innerHTML = '<div class="calc-empty">Ingresa tu consumo bimestral para ver el estimado.</div>';
+      return;
+    }
+
+    const kwhDiario = kwh / DIAS_POR_PERIODO_BIMESTRAL;
+    const kwSistema = kwhDiario / (HORAS_SOL_PICO_PLAYA_DEL_CARMEN * FACTOR_PERDIDAS_SISTEMA);
+    const numPaneles = Math.max(1, Math.round((kwSistema * 1000) / panelW));
+    const potenciaInstaladaKw = (numPaneles * panelW) / 1000;
+
+    const notaTipo = tipo === 'residencial' ? '' :
+      '<div class="calc-note">Los proyectos comerciales/hoteleros suelen operar en media tensión — el tamaño final se confirma con un estudio de demanda de carga.</div>';
+
+    result.innerHTML = `
+      <div class="calc-stat"><span>Consumo diario promedio</span><b>${kwhDiario.toFixed(1)} kWh/día</b></div>
+      <div class="calc-stat"><span>Tamaño de sistema recomendado</span><b>${kwSistema.toFixed(2)} kW</b></div>
+      <div class="calc-stat"><span>Paneles sugeridos</span><b>${numPaneles} × ${panelW} W</b></div>
+      <div class="calc-stat"><span>Potencia instalada total</span><b>${potenciaInstaladaKw.toFixed(2)} kW</b></div>
+      ${notaTipo}
+      <div class="calc-note">Estimado preliminar, no incluye precio. Súbelo a la cotización formal para confirmarlo con tu recibo o una visita técnica.</div>
+    `;
+  }
 
   const MAX_FILE_MB = 5;
   let fileValid = true;

@@ -105,6 +105,13 @@ que dejan al cliente solo con el papeleo.
 especificaciones técnicas. Los precios se manejan en cotización directa
 con el cliente.
 
+## Tareas pendientes del negocio (no técnicas)
+
+- [ ] Comprar el dominio (p. ej. `berasolar.com` o `berasolar.mx`)
+- [ ] Dar de alta el correo corporativo (p. ej. `contacto@berasolar.com`)
+- [ ] Tomar/recopilar fotos reales de proyectos instalados, para
+      reemplazar las fotos de stock que trae el sitio por ahora
+
 ## Contenido del repo
 
 ```
@@ -121,18 +128,43 @@ bera-solar/
 
 Landing page de una sola página, sin dependencias de build (HTML/CSS/JS
 en un solo archivo, fuentes vía Google Fonts CDN). Incluye: hero, quiénes
-somos, por qué elegirnos, servicios, tecnología y equipo, proceso de
-instalación, financiamiento, sección de hoteles/negocios, y formulario de
-cotización (con carga de recibo CFE, validación de tamaño máx. 5 MB en
-el navegador — el envío real y el procesamiento del archivo todavía no
-están conectados a un backend).
+somos, por qué elegirnos, servicios, tecnología y equipo, **calculadora
+de sistema (cotizador rápido)**, proceso de instalación, financiamiento,
+sección de hoteles/negocios, y formulario de cotización formal (con carga
+de recibo CFE, validación de tamaño máx. 5 MB en el navegador — el envío
+real y el procesamiento del archivo todavía no están conectados a un
+backend).
+
+**Fotos:** el sitio usa fotos de stock de Pexels (licencia gratuita para
+uso comercial, sin necesidad de atribución) como placeholder en el hero,
+"quiénes somos", tecnología, hoteles/negocios y un banner divisor. Cada
+`<img>` tiene un comentario HTML arriba indicando que es foto de stock y
+debe reemplazarse por fotos reales de instalaciones de Bera Solar (ver
+tarea pendiente arriba). Cada imagen tiene un `onerror` que la oculta
+sola si el link llegara a caerse, para que nunca se vea un ícono de
+imagen rota.
+
+**Calculadora de sistema (`#calculadora`):** cotizador instantáneo del
+lado del cliente (JavaScript puro, sin backend) — el visitante captura su
+consumo bimestral en kWh y ve al momento: consumo diario promedio, tamaño
+de sistema recomendado (kW), número de paneles sugeridos y potencia
+instalada total. Usa exactamente la misma fórmula que
+`cotizador/cotizador_cfe.py` (horas sol pico, factor de pérdidas, días
+por bimestre) — si se ajusta la fórmula en un lado, hay que ajustarla en
+el otro (están documentados con el mismo comentario en ambos archivos).
+Es un estimado preliminar, no un precio; el CTA de la calculadora manda
+al formulario de cotización formal.
 
 **Pendiente:**
-- Conectar el formulario a un backend real (ej. Netlify Forms, o un
-  endpoint propio) para que las cotizaciones lleguen a correo/CRM
+- Conectar el formulario de cotización formal a un backend real (ej.
+  Netlify Forms, o un endpoint propio) para que las cotizaciones lleguen
+  a correo/CRM
 - Recomendación de hosting dada: **Netlify** (por el manejo de
   formularios integrado sin backend propio). Vercel o Cloudflare Pages
   son alternativas si se necesita algo más dinámico a futuro.
+- Conectar `cotizador_cfe.py` al formulario web (que el cliente suba su
+  recibo y el backend lo procese automáticamente), en vez de que hoy solo
+  valide tamaño de archivo en el navegador.
 
 ### `cotizador/cotizador_cfe.py`
 
@@ -142,6 +174,27 @@ un tamaño de sistema estimado (kW, número de paneles sugerido).
 
 Uso: `python cotizador_cfe.py recibo.pdf`
 
+**Revisión rápida antes del OCR (`parece_recibo_cfe()`):** antes de correr
+el OCR (que es lo lento/pesado), el script hace una revisión barata sin
+OCR del archivo para descartar de entrada lo que claramente no es un
+recibo CFE:
+- Verifica que la extensión y la cabecera del archivo (PDF/JPG/PNG)
+  coincidan de verdad con el tipo declarado.
+- Para PDFs, revisa que no tenga más de 3 páginas (un recibo CFE real
+  trae 1-2) y busca en el texto extraíble (sin OCR) el RFC oficial de
+  CFE (`CFE370814QI0`, es el mismo en todo el país) o el nombre "Comisión
+  Federal de Electricidad" — esto se probó contra un recibo CFE real y sí
+  aparece de forma legible aunque el resto del documento use una fuente
+  protegida que vuelve el texto ilegible sin OCR.
+- Si no encuentra esos marcadores pero sí encuentra "kWh", o si el PDF
+  casi no tiene texto extraíble (típico cuando la fuente está protegida),
+  igual lo deja pasar a OCR en vez de rechazarlo — para no bloquear un
+  recibo válido por error.
+- Si de plano no coincide con nada de esto (otro tipo de documento,
+  demasiadas páginas, archivo corrupto), se rechaza antes de gastar OCR.
+  Se puede saltar esta revisión con `--forzar-ocr` si estás seguro de que
+  el archivo sí es un recibo.
+
 **Estado actual:** herramienta interna de apoyo para el equipo de ventas,
 no cotizador automático de cara al cliente todavía — el OCR puede fallar
 en leer el número de kWh correctamente según el formato del recibo, así
@@ -150,7 +203,8 @@ enviar".
 
 **Pendiente / próximos pasos discutidos:**
 - Probar el script con recibos reales de clientes para medir qué tan
-  seguido el OCR extrae el dato correcto
+  seguido el OCR extrae el dato correcto, y qué tan seguido
+  `parece_recibo_cfe()` deja pasar o rechaza recibos válidos
 - Eventualmente conectar este procesamiento al formulario web (que el
   cliente suba el recibo en la página y el backend lo procese
   automáticamente) en vez de correrlo manualmente por CLI
